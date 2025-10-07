@@ -11,9 +11,9 @@ body {
 
 .Content {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100vh;
+    flex-direction: column; /* stack children vertically so .Projects is under .Intro */
+    align-items: center; /* center sections horizontally */
+    min-height: 100vh; /* allow page to grow beyond viewport */
     width: 75%;
 }
 
@@ -48,6 +48,7 @@ body {
     box-shadow: 0px 10px 8px #1a1a1a;
 }
 
+
 .About p {
     width: 90%;
 }
@@ -66,7 +67,7 @@ body {
     flex: 1;
     margin-top: 20px;
     background: #2B3035;
-    min-height: 400px;
+    min-height: 450px;
     box-shadow: 0px 10px 8px #1a1a1a;
 }
 
@@ -76,7 +77,7 @@ body {
     border: 1px solid #e9ecef;
     padding: 12px 16px;
     border-radius: 8px;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     margin-left: auto;
     margin-right: auto;
     box-shadow: 0px 5px 8px #1a1a1a;
@@ -93,6 +94,12 @@ body {
 
 a {
   color: #e9ecef; 
+}
+
+.Projects {
+        width: 100%;
+        margin-top: 40px;
+        text-align: center;
 }
 
 
