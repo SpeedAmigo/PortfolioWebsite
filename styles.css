@@ -87,7 +87,7 @@ body {
     min-width: 400px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1320px) {
     .About {
         grid-template-columns: 1fr; /* single column */
         grid-template-rows: auto auto;
@@ -159,6 +159,7 @@ body {
     color: var(--color-text);
     background: var(--color-muted-surface);
     box-shadow: var(--shadow-md);
+    transition: transform 0.2s ease-out;
 }
 
 .about-link:hover {
