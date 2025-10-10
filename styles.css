@@ -52,14 +52,17 @@ body {
 
 body h1 {
     color: var(--h1-color);
+    font-family: "lora", serif;
 }
 
 body h2 {
     color: var(--h2-color);
+    font-family: "lora", serif;
 }
 
 body h3 {
     color: var(--h3-color);
+    font-family: "lora", serif;
 }
 
 body p {
