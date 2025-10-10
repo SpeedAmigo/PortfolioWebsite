@@ -5,7 +5,7 @@
     --color-hover-surface: #3a4046;
     --color-muted-surface: #343a40;
     --color-text: #959783;
-    --color-border: #e9ecef;
+    --color-border: #8f8f8f;
     --color-border-muted: #e9ecef33;
 
     --shadow-md: 0px 5px 8px #1a1a1a;
@@ -57,15 +57,31 @@ body {
     color : black;
     z-index: 1000;
     box-shadow: var(--shadow-lg);
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .nav-link {
     display: inline-block;
-    line-height: var(--nav-height);
-    padding: 0 20px;
+    line-height: normal;
+    height: auto;
+    padding: 10px 20px;
+    margin-left: 20px;
     text-decoration: none;
     color: var(--color-text);
     font-weight: bold;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-muted-surface);
+    box-shadow: var(--shadow-md);
+}
+
+.nav-link:hover {
+    background: var(--color-hover-surface);
+    transform: translateY(-2px);
+    transition: transform 0.2s ease;
 }
 
 .Intro {
