@@ -4,7 +4,17 @@
     --color-surface: #2B3035;
     --color-hover-surface: #3a4046;
     --color-muted-surface: #343a40;
-    --color-text: #959783;
+
+    --h1-color: #e3e0e9;
+    --h2-color: #e3e0e9;
+    --h3-color: #e3e0e9;
+    --p-color: #b3acbe;
+    --a-color: #b3acbe;
+    --i-color: #b3acbe;
+    --div-color: #b3acbe;
+    --span-color: #b3acbe;
+
+
     --color-border: #8f8f8f;
     --color-border-muted: #e9ecef33;
 
@@ -36,9 +46,40 @@ body {
     margin: 0;
     background-color: var(--color-bg);
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
-    color: var(--color-text);
 
     background: linear-gradient(90deg, rgba(33, 37, 41, 1) 0%, rgba(60, 65, 74, 1) 50%, rgba(33, 37, 41, 1) 100%);
+}
+
+body h1 {
+    color: var(--h1-color);
+}
+
+body h2 {
+    color: var(--h2-color);
+}
+
+body h3 {
+    color: var(--h3-color);
+}
+
+body p {
+    color: var(--p-color);
+}
+
+body a {
+    color: var(--a-color);
+}
+
+body i {
+    color: var(--i-color);
+}
+
+body div {
+    color: var(--div-color);
+}
+
+body span {
+    color: var(--span-color);
 }
 
 .Content {
@@ -73,7 +114,6 @@ body {
     padding: 10px 20px;
     margin-left: 20px;
     text-decoration: none;
-    color: var(--color-text);
     font-weight: bold;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
@@ -188,7 +228,6 @@ body {
     padding: 10px 14px;
     border-radius: var(--radius-md);
     text-decoration: none;
-    color: var(--color-text);
     background: var(--color-muted-surface);
     box-shadow: var(--shadow-md);
     transition: transform 0.2s ease-out;
@@ -285,10 +324,6 @@ body {
   vertical-align: middle; /* Optional: aligns icon with text */
 }
 
-a {
-  color: var(--color-text); 
-}
-
 .Projects {
     width: var(--width-main);
     margin-left: auto;
@@ -339,7 +374,6 @@ a {
 .tag {
     border: 1px solid var(--color-border-muted);
     background: var(--color-muted-surface);
-    color: var(--color-text);
     padding: 4px 8px;
     border-radius: 999px;
     font-size: 12px;
@@ -359,7 +393,6 @@ a {
     padding: 8px 12px;
     border-radius: var(--radius-md);
     text-decoration: none;
-    color: var(--color-text);
     box-shadow: var(--shadow-md);
 }
 
