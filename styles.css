@@ -57,12 +57,10 @@ body h1 {
 
 body h2 {
     color: var(--h2-color);
-    font-family: "lora", serif;
 }
 
 body h3 {
     color: var(--h3-color);
-    font-family: "lora", serif;
 }
 
 body p {
@@ -122,6 +120,7 @@ body span {
     border-radius: var(--radius-md);
     background: var(--color-muted-surface);
     box-shadow: var(--shadow-md);
+    color: #e3e0e9;
 }
 
 .nav-link:hover {
@@ -297,6 +296,7 @@ body span {
 
 .Skill-item i {
     font-size: clamp(12px, 2vw, 32px);
+    color: var(--h1-color);
 }
 
 .Skills p,
