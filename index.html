@@ -39,54 +39,35 @@
         </div>
 
         <div class = "info-container">
-            <div class = "Contact">
-                <h2>Contact Me</h2>
-                <p>
-                    <i class="fa-solid fa-envelope"></i>
-                    filip.plotkowiak@gmail.com
-                </p>
-                <p>
-                    <i class="fa-solid fa-phone"></i>
-                    +48 608 083 505
-                </p>
-                <p>
-                    <i class="fa-brands fa-linkedin"></i>
-                    <a href="http://www.linkedin.com/in/filip-p%C5%82otkowiak-107938338" target="_blank">LinkedIn</a>
-                </p>
-                <p>
-                    <i class="fa-brands fa-github"></i>
-                    <a href="https://github.com/SpeedAmigo" target="_blank">GitHub</a>
-                </p>
-                <p>
-                    <i class="fa-solid fa-file-pdf"></i>
-                    <a href="GameDev_CV.pdf" target="_blank">CV</a>
-                </p>
-            </div>
             <div class = "Skills">
-                <h2>My Skills</h2>
-                <p>
-                    <i class="fa-solid fa-code"></i>
-                    C#
-                </p>
-                <p>
+                <h1>My Skills</h1>
+                <div class = "Skill-grid">
+
+                    <div class="Skill-item">
+                        <i class="fa-solid fa-code"></i>
+                        C#
+                    </div>
+
+                    <div class="Skill-item">
                     <i class="fa-solid fa-code"></i>
                     C++
-                </p>
-                <p>
+                    </div>
+
+                    <div class ="Skill-item">
                     <i class="fa-brands fa-unity"></i>
                     Unity
-                </p>
-                <p>
-                    UnrealEngine
-                </p>
-                <p>
+                    </div>
+
+                    <div class="Skill-item">
                     <i class="fa-brands fa-gitkraken"></i>
                     Git Kraken
-                </p>
-                <p>
+                    </div>
+
+                    <div class="Skill-item">
                     <i class="fa-solid fa-language"></i>
                     English - B2
-                </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -161,4 +142,61 @@
 </body>
 
 </html>
+<script>
+// Utility to map value between ranges
+function map(val, minA, maxA, minB, maxB) {
+    return minB + ((val - minA) * (maxB - minB)) / (maxA - minA);
+}
+
+// Attach interactive 3D card effect to Skill items
+document.addEventListener('DOMContentLoaded', function () {
+    const items = document.querySelectorAll('.Skill-item');
+
+    items.forEach((item) => {
+        item.addEventListener('mousemove', (ev) => {
+            const rect = item.getBoundingClientRect();
+            const x = ev.clientX - rect.left;
+            const y = ev.clientY - rect.top;
+            const w = rect.width || 1;
+            const h = rect.height || 1;
+
+            // Stronger tilt, inverted to tilt toward the cursor
+            const ry = map(x, 0, w, -16, 16); // rotateY
+            const rx = map(y, 0, h, 16, -16); // rotateX
+
+            // Update CSS variables for transform and glare
+            item.style.setProperty('--ry', ry + 'deg');
+            item.style.setProperty('--rx', rx + 'deg');
+            item.style.setProperty('--px', (x / w) * 100 + '%');
+            item.style.setProperty('--py', (y / h) * 100 + '%');
+            item.style.setProperty('--glare', 1);
+
+            // Move transform origin toward the cursor and translate slightly away
+            const ox = (x / w) * 100 + '%';
+            const oy = (y / h) * 100 + '%';
+            item.style.setProperty('--ox', ox);
+            item.style.setProperty('--oy', oy);
+
+            // Translate a few pixels away from cursor to "keep distance"
+            const dx = x - w / 2; // positive if cursor is right of center
+            const dy = y - h / 2; // positive if cursor is below center
+            const maxShift = 6; // px, subtle
+            const tx = (dx / (w / 2)) * maxShift; // -maxShift..maxShift
+            const ty = (dy / (h / 2)) * maxShift; // -maxShift..maxShift
+            item.style.setProperty('--tx', (-tx).toFixed(2) + 'px');
+            item.style.setProperty('--ty', (-ty).toFixed(2) + 'px');
+        });
+
+        item.addEventListener('mouseleave', () => {
+            item.style.setProperty('--ry', '0deg');
+            item.style.setProperty('--rx', '0deg');
+            item.style.setProperty('--glare', 0);
+            item.style.setProperty('--tx', '0px');
+            item.style.setProperty('--ty', '0px');
+            item.style.setProperty('--ox', '50%');
+            item.style.setProperty('--oy', '50%');
+        });
+    });
+});
+</script>
  

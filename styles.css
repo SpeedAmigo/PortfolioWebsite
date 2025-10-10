@@ -87,6 +87,25 @@ body {
     min-width: 400px;
 }
 
+@media (max-width: 1200px) {
+    .About {
+        grid-template-columns: 1fr; /* single column */
+        grid-template-rows: auto auto;
+        text-align: center;
+    }
+
+    .Photo {
+        margin-left: auto;
+        margin-right: auto; /* center photo in single column layout */
+        justify-self: center; /* center photo in single column layout */
+        margin-bottom: var(--gap-md); /* space below photo */
+    }
+
+    .About-right {
+        min-width: 0; /* remove fixed min-width to allow shrinking */
+    }
+}
+
 
 .About p { width: 100%; }
 
@@ -152,17 +171,79 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    max-width: 100%;
-    margin: 0 auto;
     width: 100%;
+    margin-left: auto;
+    margin-right: auto;
     gap: var(--gap-md);
 }
 
-.Skills, .Contact {
+.Skills {
     flex: 1;
     margin-top: 20px;
-    min-height: 450px;
+    min-height: 100px;
+    margin-left: auto;
+    margin-right: auto;
 }
+
+.Skill-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-rows: repeat(1, 1fr);
+    gap: 10px;
+    width: 100%;
+}
+
+.Skill-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: clamp(12px, 2vw, 20px);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-md);
+    border-radius: var(--radius-md);
+    text-align: center;
+    aspect-ratio: 1 / 1; /* make square */
+
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: transform 0.15s ease;
+    /* Compose scale from hover with rotation from JS via CSS vars */
+    transform-origin: var(--ox, 50%) var(--oy, 50%);
+    transform: translate3d(var(--tx, 0px), var(--ty, 0px), 0)
+               rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))
+               scale(var(--scale, 1));
+}
+
+.Skill-item:hover { 
+    z-index: 10; --scale: 1.06;
+    background: var(--color-hover-surface);
+ }
+
+.Skill-item i {
+    font-size: clamp(12px, 2vw, 32px);
+}
+
+/* Glare highlight overlay that follows the cursor */
+.Skill-item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+        520px circle at var(--px, 50%) var(--py, 50%),
+        rgba(31, 31, 31, 0.14),
+        rgba(36, 36, 36, 0.06) 100%,
+        transparent 44%
+    );
+    opacity: var(--glare, 0);
+    transition: opacity 0.15s ease;
+    pointer-events: none;
+}
+
 
 .Skills p,
 .Contact p {
@@ -205,7 +286,7 @@ a {
 }
 
 /* Shared surface for card-like blocks */
-.Skills, .Contact, .project-card {
+.Contact, .project-card {
     background: var(--color-surface);
     box-shadow: var(--shadow-lg);
     border-radius: var(--radius-lg);
@@ -289,23 +370,17 @@ a {
         justify-self: center; 
     }
     .Photo { 
-        width: min(75vw, 360px); 
-        max-width: 100%; 
+        width: 100%;
+        aspect-ratio: 1 / 1;  
         margin-left: auto; 
         margin-right: auto; 
     }
-    .info-container {
-        flex-direction: column;
-        max-width: var(--width-narrow);
-        align-items: stretch; /* let children fill available width */
+    .Skills { 
+        width: 100%; 
     }
     .Intro, .Projects { width: var(--width-narrow); }
-    .About { width: 100%; }
+    .About .info-container { width: 100%; }
     .project-stack { width: 100%; }
-    .Skills, .Contact {
-        width: 100%;
-        min-height: auto; /* avoid overly tall boxes on mobile */
-    }
     .Skills p, .Contact p { width: var(--width-narrow); }
 }
 
