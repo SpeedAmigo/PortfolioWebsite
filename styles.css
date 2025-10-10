@@ -21,6 +21,10 @@
     --width-narrow: 90%;
 }
 
+html {
+    scroll-behavior: smooth; /* smooth scrolling for anchor links */
+}
+
 /* Better box model for consistent sizing */
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -53,6 +57,15 @@ body {
     color : black;
     z-index: 1000;
     box-shadow: var(--shadow-lg);
+}
+
+.nav-link {
+    display: inline-block;
+    line-height: var(--nav-height);
+    padding: 0 20px;
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: bold;
 }
 
 .Intro {
