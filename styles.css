@@ -21,6 +21,9 @@
     --width-narrow: 90%;
 }
 
+/* Better box model for consistent sizing */
+*, *::before, *::after { box-sizing: border-box; }
+
 body {
     display: flex;
     justify-content: center;
@@ -61,19 +64,88 @@ body {
 }
 
 .About {
-    display: flex; /* single declaration */
-    flex-direction: column;
+    /* two-column layout: photo left, text+links right */
+    display: grid;
+    grid-template-columns: minmax(220px, 320px) 1fr;
+    column-gap: var(--gap-md);
+    row-gap: 0;
+    align-items: start;
     margin-left: auto;
     margin-right: auto;
-    justify-content: center;
-    align-items: center;
     width: 100%;
-    text-align: center;
+    padding: 0; /* container has no background */
+    background: transparent;
+    box-shadow: none;
+}
+
+/* Right column wrapper to stack description + links tightly */
+.About-right {
+    display: grid;
+    grid-template-rows: 1fr auto; /* description grows, links at bottom */
+    gap: 10px;
+    height: 100%;
+    min-width: 400px;
 }
 
 
-.About p {
-    width: var(--width-narrow);
+.About p { width: 100%; }
+
+/* Photo block */
+.Photo {
+    width: 100%; /* fill the left column */
+    max-width: 320px;
+    aspect-ratio: 1 / 1; /* square */
+    border-radius: var(--radius-lg);
+    background: #1f2327 center/cover no-repeat; /* placeholder bg */
+    box-shadow: var(--shadow-lg);
+    background-color: var(--color-surface); /* card surface */
+    justify-self: start; /* align left */
+    overflow: hidden; /* avoid visual overflow */
+}
+
+/* Right column content */
+.Description {
+    align-self: stretch; /* fill available height */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--color-surface);
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    text-align: left;
+}
+
+.Links-About {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 0; /* tight under description via wrapper gap */
+    background: var(--color-surface);
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    align-self: stretch; /* fill right column width */
+    width: 100%;
+}
+
+.about-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--color-border);
+    padding: 10px 14px;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--color-text);
+    background: var(--color-muted-surface);
+    box-shadow: var(--shadow-md);
+}
+
+.about-link:hover {
+    background: var(--color-hover-surface);
+    transform: translateY(-2px);
+    transition: transform 0.2s ease;
 }
 
 .info-container {
@@ -133,7 +205,7 @@ a {
 }
 
 /* Shared surface for card-like blocks */
-.About, .Skills, .Contact, .project-card {
+.Skills, .Contact, .project-card {
     background: var(--color-surface);
     box-shadow: var(--shadow-lg);
     border-radius: var(--radius-lg);
@@ -206,6 +278,22 @@ a {
 
 /* Responsive tweaks */
 @media (max-width: 768px) {
+    .About {
+        grid-template-columns: 1fr; /* stack */
+        text-align: center;
+    }
+    .Links-About { 
+        justify-content: center; 
+    }
+    .Description { 
+        justify-self: center; 
+    }
+    .Photo { 
+        width: min(75vw, 360px); 
+        max-width: 100%; 
+        margin-left: auto; 
+        margin-right: auto; 
+    }
     .info-container {
         flex-direction: column;
         max-width: var(--width-narrow);
