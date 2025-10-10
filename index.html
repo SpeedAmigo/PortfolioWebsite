@@ -143,60 +143,29 @@
 
 </html>
 <script>
-// Utility to map value between ranges
-function map(val, minA, maxA, minB, maxB) {
-    return minB + ((val - minA) * (maxB - minB)) / (maxA - minA);
-}
+    document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.Skill-item');
 
-// Attach interactive 3D card effect to Skill items
-document.addEventListener('DOMContentLoaded', function () {
-    const items = document.querySelectorAll('.Skill-item');
+  cards.forEach((card) => {
+    card.addEventListener('mousemove', (ev) => {
+      const rect = card.getBoundingClientRect();
+      const x = ev.clientX - rect.left;   // mouse X within card
+      const y = ev.clientY - rect.top;    // mouse Y within card
 
-    items.forEach((item) => {
-        item.addEventListener('mousemove', (ev) => {
-            const rect = item.getBoundingClientRect();
-            const x = ev.clientX - rect.left;
-            const y = ev.clientY - rect.top;
-            const w = rect.width || 1;
-            const h = rect.height || 1;
+      const px = (x / rect.width) - 0.5;  // -0.5 .. 0.5
+      const py = (y / rect.height) - 0.5; // -0.5 .. 0.5
 
-            // Stronger tilt, inverted to tilt toward the cursor
-            const ry = map(x, 0, w, -16, 16); // rotateY
-            const rx = map(y, 0, h, 16, -16); // rotateX
+      const rotateY = px * 30;            // degrees
+      const rotateX = -py * 30;           // degrees
 
-            // Update CSS variables for transform and glare
-            item.style.setProperty('--ry', ry + 'deg');
-            item.style.setProperty('--rx', rx + 'deg');
-            item.style.setProperty('--px', (x / w) * 100 + '%');
-            item.style.setProperty('--py', (y / h) * 100 + '%');
-            item.style.setProperty('--glare', 1);
-
-            // Move transform origin toward the cursor and translate slightly away
-            const ox = (x / w) * 100 + '%';
-            const oy = (y / h) * 100 + '%';
-            item.style.setProperty('--ox', ox);
-            item.style.setProperty('--oy', oy);
-
-            // Translate a few pixels away from cursor to "keep distance"
-            const dx = x - w / 2; // positive if cursor is right of center
-            const dy = y - h / 2; // positive if cursor is below center
-            const maxShift = 6; // px, subtle
-            const tx = (dx / (w / 2)) * maxShift; // -maxShift..maxShift
-            const ty = (dy / (h / 2)) * maxShift; // -maxShift..maxShift
-            item.style.setProperty('--tx', (-tx).toFixed(2) + 'px');
-            item.style.setProperty('--ty', (-ty).toFixed(2) + 'px');
-        });
-
-        item.addEventListener('mouseleave', () => {
-            item.style.setProperty('--ry', '0deg');
-            item.style.setProperty('--rx', '0deg');
-            item.style.setProperty('--glare', 0);
-            item.style.setProperty('--tx', '0px');
-            item.style.setProperty('--ty', '0px');
-            item.style.setProperty('--ox', '50%');
-            item.style.setProperty('--oy', '50%');
-        });
+      // Apply to the card itself; include perspective for 3D and a slight scale
+      card.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.1)`;
     });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
+    });
+  });
 });
 </script>
  

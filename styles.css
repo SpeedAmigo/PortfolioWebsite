@@ -211,39 +211,18 @@ body {
     transform-style: preserve-3d;
     will-change: transform;
     transition: transform 0.15s ease;
-    /* Compose scale from hover with rotation from JS via CSS vars */
-    transform-origin: var(--ox, 50%) var(--oy, 50%);
-    transform: translate3d(var(--tx, 0px), var(--ty, 0px), 0)
-               rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))
-               scale(var(--scale, 1));
+    perspective: 600px;
 }
 
 .Skill-item:hover { 
-    z-index: 10; --scale: 1.06;
+    z-index: 10; 
+    transform: scale(1.2);
     background: var(--color-hover-surface);
  }
 
 .Skill-item i {
     font-size: clamp(12px, 2vw, 32px);
 }
-
-/* Glare highlight overlay that follows the cursor */
-.Skill-item::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: radial-gradient(
-        520px circle at var(--px, 50%) var(--py, 50%),
-        rgba(31, 31, 31, 0.14),
-        rgba(36, 36, 36, 0.06) 100%,
-        transparent 44%
-    );
-    opacity: var(--glare, 0);
-    transition: opacity 0.15s ease;
-    pointer-events: none;
-}
-
 
 .Skills p,
 .Contact p {
