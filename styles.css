@@ -241,6 +241,12 @@ body span {
     transition: transform 0.2s ease;
 }
 
+/* Brief copied feedback on the existing links */
+.about-link.copied {
+    background: var(--h1-color);
+    color: #fff;
+}
+
 .info-container {
     display: flex;
     justify-content: space-between;
@@ -355,6 +361,7 @@ body span {
     margin-top: var(--gap-md);
     padding: 18px;
     text-align: left;
+    min-height: 500px; /* allow growth if images need more space */
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -403,6 +410,86 @@ body span {
     background: var(--color-hover-surface);
     transform: translateY(-2px);
     transition: transform 0.2s ease;
+}
+
+/* Project screenshots: one big hero on top, rest below in grid (max 3 columns) */
+.Project-Images {
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding-top: 10px;
+}
+
+.Project-Images img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-lg);
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+    cursor: zoom-in; /* indicate click-to-zoom */
+}
+
+/* Hero image spans full width and uses cinematic ratio */
+.Project-Images img:first-child {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
+}
+
+/* Thumbnails are square below the hero */
+.Project-Images img:not(:first-child) {
+    aspect-ratio: 1 / 1;
+}
+
+.Project-Images img:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s ease;
+}
+
+/* Responsive: reduce columns on smaller screens */
+@media (max-width: 1024px) {
+    .Project-Images { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+    .Project-Images { grid-template-columns: 1fr; }
+}
+
+/* Lightbox overlay */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: none; /* toggled by .open */
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 2000; /* above fixed nav */
+}
+
+.lightbox.open { display: flex; }
+
+.lightbox-img {
+    max-width: 92vw;
+    max-height: 92vh;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 28px;
+    line-height: 1;
+    padding: 6px 10px;
+    color: #fff;
+    background: transparent;
+    border: none;
+    cursor: pointer;
 }
 
 /* Responsive tweaks */

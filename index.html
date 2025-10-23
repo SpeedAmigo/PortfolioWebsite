@@ -109,74 +109,60 @@
 
         <div class="project-stack">
             <div class="project-card">
-                <h3>Space Shooter</h3>
-                <p>A 2D space shooter built in Unity with C#: player movement, shooting, enemy AI, and power‑ups.</p>
+                <h3>Pizza Slash</h3>
+                <p>A game where players cut vegetables and avoid pc parts. This game was created with komputronik gaming and was showed at PGA in 2025</p>
                 <div class="project-meta">
                     <span class="tag">Unity</span>
                     <span class="tag">C#</span>
                     <span class="tag">2D</span>
                 </div>
                 <div class="project-links">
-                    <a class="project-link" href="https://github.com/SpeedAmigo" target="_blank">
+                    <a class="project-link" href="https://github.com/SpeedAmigo/Komputronik-Ninja" target="_blank">
                         <i class="fa-brands fa-github"></i>
                         Code
                     </a>
-                    <a class="project-link" href="#" target="_blank">
-                        <i class="fa-solid fa-arrow-down"></i>
-                        Show More
-                    </a>
+                </div>
+                <div class="Project-Images">
+                    <img src="path/to/image1.jpg" alt="Pizza Slash Screenshot 1">
+                    <img src="path/to/image2.jpg" alt="Pizza Slash Screenshot 2">
+                    <img src="path/to/image2.jpg" alt="Pizza Slash Screenshot 3">
+                    <img src="path/to/image2.jpg" alt="Pizza Slash Screenshot 4">
                 </div>
             </div>
                 <div class="project-card">
-                <h3>Space Shooter</h3>
-                <p>A 2D space shooter built in Unity with C#: player movement, shooting, enemy AI, and power‑ups.</p>
+                <h3>Elektronik</h3>
+                <p>2D platformer where players jump between platforms. this game were made with Komputronik gaming and was released on their website.</p>
                 <div class="project-meta">
                     <span class="tag">Unity</span>
                     <span class="tag">C#</span>
                     <span class="tag">2D</span>
                 </div>
                 <div class="project-links">
-                    <a class="project-link" href="https://github.com/SpeedAmigo" target="_blank">
+                    <a class="project-link" href="https://github.com/Karmelica/Komputronik-Tower" target="_blank">
                         <i class="fa-brands fa-github"></i>
                         Code
                     </a>
-                    <a class="project-link" href="#" target="_blank">
-                        <i class="fa-solid fa-arrow-down"></i>
-                        Show More
-                    </a>
+                </div>
+                <div class="Project-Images">
+                    <img src="path/to/image1.jpg" alt="Pizza Slash Screenshot 1">
+                    <img src="path/to/image2.jpg" alt="Pizza Slash Screenshot 2">
+                    <img src="path/to/image2.jpg" alt="Pizza Slash Screenshot 3">
+                    <img src="path/to/image2.jpg" alt="Pizza Slash Screenshot 4">
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Lightbox overlay for fullscreen image viewing -->
+<div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <button class="lightbox-close" aria-label="Close image">×</button>
+        <img class="lightbox-img" alt="Project image fullscreen">
+    </div>
+
+<script src="script.js"></script>
+
 </body>
 
 </html>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-  const cards = document.querySelectorAll('.Skill-item');
-
-  cards.forEach((card) => {
-    card.addEventListener('mousemove', (ev) => {
-      const rect = card.getBoundingClientRect();
-      const x = ev.clientX - rect.left;   // mouse X within card
-      const y = ev.clientY - rect.top;    // mouse Y within card
-
-      const px = (x / rect.width) - 0.5;  // -0.5 .. 0.5
-      const py = (y / rect.height) - 0.5; // -0.5 .. 0.5
-
-      const rotateY = px * 30;            // degrees
-      const rotateX = -py * 30;           // degrees
-
-      // Apply to the card itself; include perspective for 3D and a slight scale
-      card.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.1)`;
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
-    });
-  });
-});
-</script>
  
