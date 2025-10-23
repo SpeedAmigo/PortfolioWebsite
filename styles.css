@@ -241,12 +241,6 @@ body span {
     transition: transform 0.2s ease;
 }
 
-/* Brief copied feedback on the existing links */
-.about-link.copied {
-    background: var(--h1-color);
-    color: #fff;
-}
-
 .info-container {
     display: flex;
     justify-content: space-between;

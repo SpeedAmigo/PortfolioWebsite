@@ -94,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-    // Copy-to-clipboard on existing Email and Phone links (no extra buttons)
     function copyText(text) {
       return (navigator.clipboard && navigator.clipboard.writeText)
         ? navigator.clipboard.writeText(text)
