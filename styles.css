@@ -415,30 +415,36 @@ body span {
     padding-top: 10px;
 }
 
-.Project-Images img {
+/* Media tiles inside the grid (images and videos share the same look) */
+.Project-Images > img,
+.Project-Images > video {
     width: 100%;
     object-fit: cover;
     border-radius: var(--radius-lg);
     background: var(--color-surface);
     box-shadow: var(--shadow-lg);
     display: block;
+}
+
+/* Extra UX for images only */
+.Project-Images > img {
     user-select: none;
     -webkit-user-drag: none;
     cursor: zoom-in; /* indicate click-to-zoom */
 }
 
 /* Hero image spans full width and uses cinematic ratio */
-.Project-Images img:first-child {
+.Project-Images > :first-child {
     grid-column: 1 / -1;
     aspect-ratio: 16 / 9;
 }
 
 /* Thumbnails are square below the hero */
-.Project-Images img:not(:first-child) {
+.Project-Images > :not(:first-child) {
     aspect-ratio: 1 / 1;
 }
 
-.Project-Images img:hover {
+.Project-Images > img:hover {
     transform: translateY(-2px);
     transition: transform 0.2s ease;
 }
