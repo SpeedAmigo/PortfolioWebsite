@@ -55,9 +55,9 @@
       var loaderUrl = buildUrl + "/TowerBuild.loader.js";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/TowerBuild.data.br",
-        frameworkUrl: buildUrl + "/TowerBuild.framework.js.br",
-        codeUrl: buildUrl + "/TowerBuild.wasm.br",
+        dataUrl: buildUrl + "/TowerBuild.data.gz",
+        frameworkUrl: buildUrl + "/TowerBuild.framework.js.gz",
+        codeUrl: buildUrl + "/TowerBuild.wasm.gz",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Komputronik tower",
@@ -104,23 +104,80 @@
 
       document.querySelector("#unity-loading-bar").style.display = "block";
 
-      var script = document.createElement("script");
-      script.src = loaderUrl;
-      script.onload = () => {
-        createUnityInstance(canvas, config, (progress) => {
-          document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
-              }).then((unityInstance) => {
-                document.querySelector("#unity-loading-bar").style.display = "none";
-                document.querySelector("#unity-fullscreen-button").onclick = () => {
-                  unityInstance.SetFullscreen(1);
-                };
-
-              }).catch((message) => {
-                alert(message);
-              });
+      // Helper: append the original Unity loader script and hook into its promise
+      function loadLoaderAndStart() {
+        var script = document.createElement("script");
+        script.src = loaderUrl;
+        script.onload = () => {
+          createUnityInstance(canvas, config, (progress) => {
+            document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
+          }).then((unityInstance) => {
+            document.querySelector("#unity-loading-bar").style.display = "none";
+            document.querySelector("#unity-fullscreen-button").onclick = () => {
+              unityInstance.SetFullscreen(1);
             };
+          }).catch((message) => {
+            alert(message);
+          });
+        };
+        document.body.appendChild(script);
+      }
 
-      document.body.appendChild(script);
+      // If the build files are gzip-compressed on disk (e.g. TowerBuild.*.gz), GitHub Pages
+      // will not add Content-Encoding headers. In that case we fetch the .gz files, decompress
+      // them in the browser using pako, create blob URLs and point Unity's config to them.
+      // This allows the build to work on static hosts that serve raw .gz files.
+
+      function fallbackLoad() {
+        // fallback: just load the loader script and hope server provides correct headers
+        loadLoaderAndStart();
+      }
+
+      // Try to load pako from CDN, then attempt client-side decompression.
+      var pakoScript = document.createElement('script');
+      pakoScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js';
+      pakoScript.onload = async () => {
+        try {
+          // Decompress helper: fetch a .gz file, ungzip and return a blob URL
+          async function fetchAndDecompress(url, type) {
+            const resp = await fetch(url);
+            if (!resp.ok) throw new Error('Fetch failed: ' + url + ' status=' + resp.status);
+            const ab = await resp.arrayBuffer();
+            const decompressed = pako.ungzip(new Uint8Array(ab));
+            const blob = new Blob([decompressed], { type: type });
+            return URL.createObjectURL(blob);
+          }
+
+          // Only attempt to decompress if the files on disk use the .gz extension.
+          // Adjust names if your build uses .br or no compression.
+          const dataGz = buildUrl + '/TowerBuild.data.gz';
+          const frameworkGz = buildUrl + '/TowerBuild.framework.js.gz';
+          const codeGz = buildUrl + '/TowerBuild.wasm.gz';
+
+          // Try to fetch all compressed files in parallel
+          const [dataUrlBlob, frameworkUrlBlob, codeUrlBlob] = await Promise.all([
+            fetchAndDecompress(dataGz, 'application/octet-stream'),
+            fetchAndDecompress(frameworkGz, 'application/javascript'),
+            fetchAndDecompress(codeGz, 'application/wasm')
+          ]);
+
+          // Point Unity config to the in-memory blobs
+          config.dataUrl = dataUrlBlob;
+          config.frameworkUrl = frameworkUrlBlob;
+          config.codeUrl = codeUrlBlob;
+
+          // Now load the normal loader script which will use the modified config
+          loadLoaderAndStart();
+        } catch (e) {
+          console.warn('Client-side decompression failed, falling back to normal loader:', e);
+          fallbackLoad();
+        }
+      };
+      pakoScript.onerror = () => {
+        console.warn('Failed to load pako; loading loader without client-side decompression.');
+        fallbackLoad();
+      };
+      document.body.appendChild(pakoScript);
 
     </script>
   </body>

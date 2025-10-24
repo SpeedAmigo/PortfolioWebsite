@@ -559,6 +559,42 @@ body span {
     }
 }
 
+/* Unity modal to host WebGL build (iframe) */
+.unity-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.85);
+    z-index: 3000;
+    padding: 16px;
+}
+.unity-modal.open { display: flex; }
+.unity-iframe {
+    width: min(1200px, 98vw);
+    height: min(720px, 92vh);
+    border: none;
+    border-radius: var(--radius-md);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    background: #000;
+}
+.unity-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    z-index: 3100;
+    background: transparent;
+    border: none;
+    color: var(--h1-color);
+    font-size: 26px;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    .unity-iframe { width: 98vw; height: 86vh; }
+}
+
 
 
 
