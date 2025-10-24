@@ -143,4 +143,42 @@ document.addEventListener('DOMContentLoaded', () => {
         copyText(phone).then(() => flashCopied(phoneLink, 'Phone copied'));
       });
     }
+
+    // Bottom CTA: show when scrolled to the bottom of the page
+    const bottomCta = document.getElementById('bottom-cta');
+    if (bottomCta) {
+      const href = bottomCta.getAttribute('data-href') || bottomCta.getAttribute('href');
+      // Click smoothly scrolls to the top of the page
+      bottomCta.addEventListener('click', (e) => {
+        // Prefer smooth behavior where supported
+        try {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } catch (err) {
+          // Fallback
+          window.scrollTo(0, 0);
+        }
+      });
+
+      function checkAtBottom() {
+        // small threshold tolerance to account for fractional pixels
+        const atBottom = (window.innerHeight + window.pageYOffset) >= (document.documentElement.scrollHeight - 8);
+        if (atBottom) {
+          bottomCta.classList.add('visible');
+          bottomCta.setAttribute('aria-hidden', 'false');
+        } else {
+          bottomCta.classList.remove('visible');
+          bottomCta.setAttribute('aria-hidden', 'true');
+        }
+      }
+
+      window.addEventListener('scroll', checkAtBottom, { passive: true });
+      window.addEventListener('resize', checkAtBottom);
+      // initial check in case the page loads already scrolled to bottom
+      checkAtBottom();
+
+      // keyboard activation
+      bottomCta.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); bottomCta.click(); }
+      });
+    }
 });

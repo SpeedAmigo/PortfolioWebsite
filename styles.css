@@ -334,6 +334,7 @@ body span {
     margin-right: auto;
     margin-top: 40px;
     text-align: center;
+    padding-bottom: calc(var(--gap-md) * 5);
 }
 
 /* Shared surface for card-like blocks */
@@ -518,6 +519,44 @@ body span {
     .About .info-container { width: 100%; }
     .project-stack { width: 100%; }
     .Skills p, .Contact p { width: var(--width-narrow); }
+}
+
+/* Bottom call-to-action button that appears when user scrolls to the page bottom */
+.bottom-cta {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    bottom: 20px;
+    z-index: 1600;
+    padding: 12px 18px;
+    border-radius: 100px;
+    background: var(--color-hover-surface);
+    color: var(--h1-color);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-lg);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 220ms ease, transform 220ms ease, visibility 220ms;
+    font-weight: 600;
+}
+
+
+.bottom-cta.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+@media (max-width: 560px) {
+    /* place to the right on very small screens so it doesn't overlay centered content */
+    .bottom-cta {
+        left: auto;
+        right: 16px;
+        transform: none;
+        bottom: 14px;
+        padding: 10px 14px;
+    }
 }
 
 
