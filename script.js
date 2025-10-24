@@ -181,4 +181,58 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); bottomCta.click(); }
       });
     }
+
+    // Unity modal: open TowerBuild/index.html in an iframe (lazy-loaded)
+    (function() {
+      const modal = document.createElement('div');
+      modal.className = 'unity-modal';
+      modal.setAttribute('role', 'dialog');
+      modal.setAttribute('aria-hidden', 'true');
+
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'unity-close';
+      closeBtn.setAttribute('aria-label', 'Close game');
+      closeBtn.innerHTML = '✕';
+
+      const iframe = document.createElement('iframe');
+      iframe.className = 'unity-iframe';
+      iframe.setAttribute('allow', 'fullscreen; autoplay; gamepad;');
+      iframe.setAttribute('title', 'Elektronik game');
+
+      modal.appendChild(closeBtn);
+      modal.appendChild(iframe);
+      document.body.appendChild(modal);
+
+      function openModal(src) {
+        iframe.src = src;
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        // focus the close button for keyboard users
+        closeBtn.focus();
+        // prevent background from scrolling
+        document.documentElement.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        // remove iframe src to free memory and stop audio
+        try { iframe.contentWindow && iframe.contentWindow.postMessage && iframe.contentWindow.postMessage('unload', '*'); } catch (e) {}
+        iframe.src = 'about:blank';
+        document.documentElement.style.overflow = '';
+      }
+
+      // Delegate Play Now buttons
+      document.querySelectorAll('.project-play-btn[data-src]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const src = btn.getAttribute('data-src');
+          if (!src) return;
+          openModal(src);
+        });
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+    })();
 });
