@@ -104,23 +104,102 @@
 
       document.querySelector("#unity-loading-bar").style.display = "block";
 
-      var script = document.createElement("script");
-      script.src = loaderUrl;
-      script.onload = () => {
-        createUnityInstance(canvas, config, (progress) => {
-          document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
-              }).then((unityInstance) => {
-                document.querySelector("#unity-loading-bar").style.display = "none";
-                document.querySelector("#unity-fullscreen-button").onclick = () => {
-                  unityInstance.SetFullscreen(1);
-                };
-
-              }).catch((message) => {
-                alert(message);
-              });
+      // Utility: load the original Unity loader and start the instance
+      function loadLoaderAndStart() {
+        var script = document.createElement("script");
+        script.src = loaderUrl;
+        script.onload = () => {
+          createUnityInstance(canvas, config, (progress) => {
+            document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
+          }).then((unityInstance) => {
+            document.querySelector("#unity-loading-bar").style.display = "none";
+            document.querySelector("#unity-fullscreen-button").onclick = () => {
+              unityInstance.SetFullscreen(1);
             };
+          }).catch((message) => {
+            alert(message);
+          });
+        };
+        document.body.appendChild(script);
+      }
 
-      document.body.appendChild(script);
+      // Try to use uncompressed files if present; otherwise fall back to .gz with client-side decompression,
+      // or finally to the normal loader expecting server-provided Content-Encoding headers.
+      (async function chooseAndLoad() {
+        // Helper to check if a URL exists (HEAD preferred)
+        async function exists(url) {
+          try {
+            const resp = await fetch(url, { method: 'HEAD' });
+            return resp && resp.ok;
+          } catch (e) {
+            return false;
+          }
+        }
+
+        const uncompressedData = buildUrl + '/TowerBuild.data';
+        const uncompressedFramework = buildUrl + '/TowerBuild.framework.js';
+        const uncompressedWasm = buildUrl + '/TowerBuild.wasm';
+
+        const gzData = buildUrl + '/TowerBuild.data.gz';
+        const gzFramework = buildUrl + '/TowerBuild.framework.js.gz';
+        const gzWasm = buildUrl + '/TowerBuild.wasm.gz';
+
+        // 1) Prefer uncompressed files if they exist
+        if (await exists(uncompressedData) && await exists(uncompressedFramework) && await exists(uncompressedWasm)) {
+          config.dataUrl = uncompressedData;
+          config.frameworkUrl = uncompressedFramework;
+          config.codeUrl = uncompressedWasm;
+          loadLoaderAndStart();
+          return;
+        }
+
+        // 2) If .gz files exist, attempt client-side decompression using pako
+        if (await exists(gzData) && await exists(gzFramework) && await exists(gzWasm)) {
+          // load pako from CDN
+          await new Promise((resolve, reject) => {
+            const s = document.createElement('script');
+            s.src = 'https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js';
+            s.onload = resolve;
+            s.onerror = reject;
+            document.head.appendChild(s);
+          }).catch(() => {
+            // couldn't load pako -> fall back to loader (may fail if server lacks headers)
+            console.warn('pako failed to load; falling back to normal loader');
+            loadLoaderAndStart();
+            return;
+          });
+
+          try {
+            async function fetchAndDecompress(url, type) {
+              const r = await fetch(url);
+              if (!r.ok) throw new Error('Fetch failed: ' + url + ' status=' + r.status);
+              const ab = await r.arrayBuffer();
+              const decompressed = pako.ungzip(new Uint8Array(ab));
+              const blob = new Blob([decompressed], { type });
+              return URL.createObjectURL(blob);
+            }
+
+            const [dataBlob, frameworkBlob, codeBlob] = await Promise.all([
+              fetchAndDecompress(gzData, 'application/octet-stream'),
+              fetchAndDecompress(gzFramework, 'application/javascript'),
+              fetchAndDecompress(gzWasm, 'application/wasm')
+            ]);
+
+            config.dataUrl = dataBlob;
+            config.frameworkUrl = frameworkBlob;
+            config.codeUrl = codeBlob;
+
+            loadLoaderAndStart();
+            return;
+          } catch (e) {
+            console.warn('Client-side decompression failed:', e);
+            // fall through to loader fallback
+          }
+        }
+
+        // 3) Final fallback: try loading loader directly and rely on server headers
+        loadLoaderAndStart();
+      })();
 
     </script>
   </body>
