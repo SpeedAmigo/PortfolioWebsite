@@ -223,12 +223,16 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Delegate Play Now buttons
-      document.querySelectorAll('.project-play-btn[data-src]').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const src = btn.getAttribute('data-src');
+      document.querySelectorAll('.project-play-btn[data-src]').forEach(el => {
+        el.addEventListener('click', (e) => {
+          // prevent anchor navigation when using <a href="..."> elements
+          try { e.preventDefault(); } catch (err) {}
+          const src = el.getAttribute('data-src');
           if (!src) return;
           openModal(src);
         });
+        // also allow Enter key activation for accessibility on non-button elements
+        el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); } });
       });
 
       closeBtn.addEventListener('click', closeModal);
