@@ -557,13 +557,10 @@ body span {
 
 /* Slightly reduce overall content scale on very small devices */
 @media (max-width: 640px) {
-    .Content {
-        transform: scale(0.96); /* zmień 0.96 na mniejszą/liczniejszą wartość jeśli chcesz bardziej/ mniej skalować */
-        transform-origin: top center;
-    }
-
     /* ensure sections use most of viewport width when scaled */
     .Intro, .Projects, .project-stack, .Skills p, .Contact p {
+        transform: scale(0.96); /* zmień 0.96 na mniejszą/liczniejszą wartość jeśli chcesz bardziej/ mniej skalować */
+        transform-origin: top center;
         width: calc(100% - 16px) !important;
         margin-left: auto;
         margin-right: auto;
