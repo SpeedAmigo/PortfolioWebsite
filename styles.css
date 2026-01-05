@@ -33,6 +33,7 @@
 
 html {
     scroll-behavior: smooth; /* smooth scrolling for anchor links */
+     background: linear-gradient(90deg, rgba(33, 37, 41, 1) 0%, rgba(60, 65, 74, 1) 50%, rgba(33, 37, 41, 1) 100%);
 }
 
 /* Better box model for consistent sizing */
@@ -46,8 +47,6 @@ body {
     margin: 0;
     background-color: var(--color-bg);
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
-
-    background: linear-gradient(90deg, rgba(33, 37, 41, 1) 0%, rgba(60, 65, 74, 1) 50%, rgba(33, 37, 41, 1) 100%);
 }
 
 body h1 {
