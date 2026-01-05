@@ -31,10 +31,15 @@
     --width-narrow: 90%;
 }
 
-html {
-    scroll-behavior: smooth; /* smooth scrolling for anchor links */
+html, body {
     height: 100%;
-     background: linear-gradient(90deg, rgba(33, 37, 41, 1) 0%, rgba(60, 65, 74, 1) 50%, rgba(33, 37, 41, 1) 100%);
+    min-height: 100%;
+    margin: 0;
+    background: linear-gradient(90deg, rgba(33,37,41,1) 0%, rgba(60,65,74,1) 50%, rgba(33,37,41,1) 100%);
+    background-color: #212529; /* fallback */
+    -webkit-text-size-adjust: 100%; /* prevent automatic font scaling */
+    -webkit-overflow-scrolling: touch; /* smoother scrolling on iOS */
+    overscroll-behavior-y: contain; /* limit overscroll background reveal */
 }
 
 /* Better box model for consistent sizing */
@@ -46,7 +51,7 @@ body {
     align-items: flex-start;
     min-height: 100vh; /* ensures full viewport height */
     margin: 0;
-    background: transparent;
+    background: linear-gradient(90deg, rgba(33, 37, 41, 1) 0%, rgba(60, 65, 74, 1) 50%, rgba(33, 37, 41, 1) 100%);
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
