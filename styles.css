@@ -133,7 +133,7 @@ body span {
 .Intro {
     margin-top: calc(var(--nav-height) + 20px); /* avoid overlap with fixed nav */
     text-align: center;
-    width: var(--width-main);
+    width: var(--width-narrow);
     margin-left: auto;
     margin-right: auto;
 }
@@ -329,7 +329,7 @@ body span {
 }
 
 .Projects {
-    width: var(--width-main);
+    width: var(--width-narrow);
     margin-left: auto;
     margin-right: auto;
     margin-top: 40px;
