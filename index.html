@@ -1,75 +1,89 @@
 <!DOCTYPE html> 
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
+    <div class = "Nav">
+        <a class="nav-link" href="#About">About Me</a>
+        <a class="nav-link" href="#Projects">Projects</a>
+    </div>
 <div class="Content">
-    <div class = "Nav"></div>
-    <div class ="Intro">
-        <h1>About me</h1>
+    <div class ="Intro" id="About">
+        <h1 >About me</h1>
+
         <div class = "About">
-            <h1>Hello, I’m Filip Płotkowiak. </h1>
-            <p>I'm a Game Development student passionate about exploring new technologies and pushing the boundaries of interactive experiences. I specialize in programming, with experience in Unity and C#.</p>
-        </div>
-        <div class = "info-container">
-            <div class = "Contact">
-                <h2>Contact Me</h2>
-                <p>
-                    <i class="fa-solid fa-envelope"></i>
-                    filip.plotkowiak@gmail.com
-                </p>
-                <p>
-                    <i class="fa-solid fa-phone"></i>
-                    +48 608 083 505
-                </p>
-                <p>
-                    <i class="fa-brands fa-linkedin"></i>
-                    <a href="http://www.linkedin.com/in/filip-p%C5%82otkowiak-107938338" target="_blank">LinkedIn</a>
-                </p>
-                <p>
-                    <i class="fa-brands fa-github"></i>
-                    <a href="https://github.com/SpeedAmigo" target="_blank">GitHub</a>
-                </p>
-                <p>
-                    <i class="fa-solid fa-file-pdf"></i>
-                    <a href="GameDev_CV.pdf" target="_blank">CV</a>
-                </p>
+            <div class="Photo" style="background-image: url('Images/IMG_Self.jpg');"></div>
+            <div class="About-right">
+                <div class = "Description">
+                <h1>Hello, I’m Filip Płotkowiak. </h1>
+                <p>I'm a Game Development student passionate about exploring new technologies and pushing the boundaries of interactive experiences. I specialize in programming, with experience in Unity and C#.</p>
+                </div>
+                <div class = "Links-About">
+                    <a class="about-link" href="http://www.linkedin.com/in/filip-p%C5%82otkowiak-107938338" target="_blank">
+                        <i class="fa-brands fa-linkedin"></i>
+                        LinkedIn
+                    </a>
+                    <a class="about-link" href="https://github.com/SpeedAmigo" target="_blank">
+                        <i class="fa-brands fa-github"></i>
+                        GitHub
+                    </a>
+                    <a class="about-link" href="PDF/Filip Płotkowiak.pdf" target="_blank">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        CV
+                    </a>
+                    <a class="about-link" href="mailto:filip.plotkowiak@gmail.com">
+                        <i class="fa-solid fa-envelope"></i>
+                        Email
+                    </a>
+                    <a class="about-link" href="tel:+48608083505">
+                        <i class="fa-solid fa-phone"></i>
+                        +48 608 083 505
+                    </a>
+                </div>
             </div>
+        </div>
+
+        <div class = "info-container">
             <div class = "Skills">
-                <h2>My Skills</h2>
-                <p>
-                    <i class="fa-solid fa-code"></i>
-                    C#
-                </p>
-                <p>
+                <h1>My Skills</h1>
+                <div class = "Skill-grid">
+
+                    <div class="Skill-item">
+                        <i class="fa-solid fa-code"></i>
+                        C#
+                    </div>
+
+                    <div class="Skill-item">
                     <i class="fa-solid fa-code"></i>
                     C++
-                </p>
-                <p>
+                    </div>
+
+                    <div class ="Skill-item">
                     <i class="fa-brands fa-unity"></i>
                     Unity
-                </p>
-                <p>
-                    UnrealEngine
-                </p>
-                <p>
+                    </div>
+
+                    <div class="Skill-item">
                     <i class="fa-brands fa-gitkraken"></i>
                     Git Kraken
-                </p>
-                <p>
+                    </div>
+
+                    <div class="Skill-item">
                     <i class="fa-solid fa-language"></i>
                     English - B2
-                </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class = "Projects">
+    <div class = "Projects" id="Projects">
         <h1>My Projects</h1>
         <!--
         Copy/paste template:
@@ -96,48 +110,62 @@
 
         <div class="project-stack">
             <div class="project-card">
-                <h3>Space Shooter</h3>
-                <p>A 2D space shooter built in Unity with C#: player movement, shooting, enemy AI, and power‑ups.</p>
+                <h3>Pizza Slash</h3>
+                <p>A fast-paced arcade game inspired by Fruit Ninja, where players slice vegetables while dodging flying PC components. Created in collaboration with Komputronik Gaming, the game was showcased at PGA 2025.</p>
                 <div class="project-meta">
-                    <span class="tag">Unity</span>
-                    <span class="tag">C#</span>
-                    <span class="tag">2D</span>
+                    <span class="tag">Main Gameplay Programmer</span>
+                    <span class="tag">Animator</span>
                 </div>
                 <div class="project-links">
-                    <a class="project-link" href="https://github.com/SpeedAmigo" target="_blank">
-                        <i class="fa-brands fa-github"></i>
-                        Code
-                    </a>
-                    <a class="project-link" href="#" target="_blank">
-                        <i class="fa-solid fa-arrow-down"></i>
-                        Show More
-                    </a>
+                </div>
+                <div class="Project-Images">
+                    <video src ="Videos/PizzaSlashVideo.mp4" autoplay loop muted controls></video>
+                    <img src="Images/PizzaSlashMenu.png" alt="Pizza Slash Screenshot 2">
+                    <img src="Images/PizzaSlashGame.png" alt="Pizza Slash Screenshot 3">
+                    <img src="Images/PizzaSlashEnd.png" alt="Pizza Slash Screenshot 4">
                 </div>
             </div>
                 <div class="project-card">
-                <h3>Space Shooter</h3>
-                <p>A 2D space shooter built in Unity with C#: player movement, shooting, enemy AI, and power‑ups.</p>
+                <h3>Elektronik</h3>
+                <p>A game in the style of an interactive contest, in which players can win prizes provided by the organizer.</p>
+                <p>Project commissioned by Komputronik.</p>
                 <div class="project-meta">
-                    <span class="tag">Unity</span>
-                    <span class="tag">C#</span>
-                    <span class="tag">2D</span>
+                    <span class="tag">Main Gameplay Programmer</span>
+                    <span class="tag">Animator</span>
                 </div>
                 <div class="project-links">
-                    <a class="project-link" href="https://github.com/SpeedAmigo" target="_blank">
-                        <i class="fa-brands fa-github"></i>
-                        Code
+                        <a class="project-link project-play-btn" href="TowerBuild/index.html" data-src="TowerBuild/index.html" role="button" aria-haspopup="dialog" aria-label="Play Elektronik" tabindex="0">
+                        <i class="fa-solid fa-gamepad"></i>
+                        Play Now!
                     </a>
-                    <a class="project-link" href="#" target="_blank">
-                        <i class="fa-solid fa-arrow-down"></i>
-                        Show More
-                    </a>
+                </div>
+                <div class="Project-Images">
+                    <video src ="Videos/ElektronikVideo.mp4" autoplay loop muted controls></video>
+                    <img src="Images/ElektronikLobby.png" alt="Pizza Slash Screenshot 2">
+                    <img src="Images/ElektronikGame.png" alt="Pizza Slash Screenshot 3">
+                    <img src="Images/ElektornikWeb.png" alt="Pizza Slash Screenshot 4">
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Lightbox overlay for fullscreen image viewing -->
+<div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <button class="lightbox-close" aria-label="Close image">×</button>
+        <img class="lightbox-img" alt="Project image fullscreen">
+    </div>
+
+<!-- Bottom CTA appears when user scrolls all the way to the page bottom -->
+<!-- Relabeled to act as 'Back to top' button — click will smoothly scroll to the top -->
+<button id="bottom-cta" class="bottom-cta" aria-hidden="true" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<script src="script.js"></script>
+
 </body>
 
 </html>
+ 
  
