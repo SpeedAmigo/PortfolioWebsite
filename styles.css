@@ -556,7 +556,7 @@ body span {
 .Content { transition: transform 160ms ease; }
 
 /* Slightly reduce overall content scale on very small devices */
-@media (max-width: 420px) {
+@media (max-width: 640px) {
     .Content {
         transform: scale(0.96); /* zmień 0.96 na mniejszą/liczniejszą wartość jeśli chcesz bardziej/ mniej skalować */
         transform-origin: top center;
