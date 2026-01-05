@@ -33,6 +33,7 @@
 
 html {
     scroll-behavior: smooth; /* smooth scrolling for anchor links */
+    height: 100%;
      background: linear-gradient(90deg, rgba(33, 37, 41, 1) 0%, rgba(60, 65, 74, 1) 50%, rgba(33, 37, 41, 1) 100%);
 }
 
@@ -45,7 +46,7 @@ body {
     align-items: center;
     min-height: 100vh; /* ensures full viewport height */
     margin: 0;
-    background-color: var(--color-bg);
+    background: transparent;
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
