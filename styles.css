@@ -558,7 +558,7 @@ body span {
 /* Slightly reduce overall content scale on very small devices */
 @media (max-width: 420px) {
     .Content {
-        transform: scale(0.85); /* zmień 0.96 na mniejszą/liczniejszą wartość jeśli chcesz bardziej/ mniej skalować */
+        transform: scale(0.96); /* zmień 0.96 na mniejszą/liczniejszą wartość jeśli chcesz bardziej/ mniej skalować */
         transform-origin: top center;
     }
 
