@@ -548,7 +548,7 @@ body span {
     transform: translateX(-50%) translateY(0);
 }
 
-@media (max-width: 560px) {
+@media (max-width: 760px) {
     /* place to the right on very small screens so it doesn't overlay centered content */
     .bottom-cta {
         left: auto;
