@@ -215,6 +215,52 @@ body span {
     text-align: left;
 }
 
+.word-rotator {
+    display: inline-grid;
+    place-items: center;
+    position: relative;
+    overflow: hidden;
+    height: 1.2em;
+    line-height: 1.2em;
+    vertical-align: middle;
+    margin-inline: 0ch;
+    width: var(--rotator-width, 10ch);
+    color: var(--h1-color);
+    font-weight: 600;
+}
+
+.word-rotator .rotating-word {
+    display: block;
+    white-space: nowrap;
+    width: 100%;
+    text-align: center;
+}
+
+.word-rotator .rotating-word.scroll-out {
+    animation: word-scroll-out 320ms ease forwards;
+}
+
+.word-rotator .rotating-word.scroll-in {
+    animation: word-scroll-in 320ms ease forwards;
+}
+
+@keyframes word-scroll-out {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-100%); opacity: 0; }
+}
+
+@keyframes word-scroll-in {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .word-rotator .rotating-word.scroll-out,
+    .word-rotator .rotating-word.scroll-in {
+        animation: none;
+    }
+}
+
 .Links-About {
     display: flex;
     flex-wrap: wrap;
@@ -375,6 +421,13 @@ body span {
     margin-top: 0;
 }
 
+.project-contributions {
+    margin: 10px 0 8px;
+    font-weight: 600;
+    color: var(--h1-color);
+    letter-spacing: 0.2px;
+}
+
 .project-meta {
     display: flex;
     flex-wrap: wrap;
@@ -388,6 +441,12 @@ body span {
     padding: 4px 8px;
     border-radius: 999px;
     font-size: 12px;
+}
+
+.tag:hover {
+    background: var(--color-hover-surface);
+    transform: translateY(-2px);
+    transition: transform 0.2s ease;
 }
 
 .project-links {

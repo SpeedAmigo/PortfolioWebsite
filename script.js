@@ -22,6 +22,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  document.querySelectorAll('.word-rotator[data-words]').forEach((rotator) => {
+    const words = (rotator.getAttribute('data-words') || '')
+      .split(',')
+      .map((word) => word.trim())
+      .filter(Boolean);
+
+    if (words.length === 0) return;
+
+    const longestWordLength = words.reduce((maxLen, word) => Math.max(maxLen, word.length), 0);
+    rotator.style.setProperty('--rotator-width', `${Math.max(longestWordLength + 1, 8)}ch`);
+
+    const rotatingWord = document.createElement('span');
+    rotatingWord.className = 'rotating-word';
+    rotatingWord.textContent = words[0];
+    rotator.textContent = '';
+    rotator.appendChild(rotatingWord);
+
+    if (words.length === 1) return;
+
+    const intervalMs = Number(rotator.getAttribute('data-interval')) || 2800;
+    let wordIndex = 0;
+
+    window.setInterval(() => {
+      rotatingWord.classList.remove('scroll-in');
+      rotatingWord.classList.add('scroll-out');
+
+      window.setTimeout(() => {
+        wordIndex = (wordIndex + 1) % words.length;
+        rotatingWord.textContent = words[wordIndex];
+        rotatingWord.classList.remove('scroll-out');
+        rotatingWord.classList.add('scroll-in');
+      }, 240);
+    }, intervalMs);
+  });
+
   // Lightbox logic for project images (guard if markup absent)
   const lightbox = document.getElementById('lightbox');
   if (lightbox) {
