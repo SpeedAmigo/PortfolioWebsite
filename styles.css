@@ -1,18 +1,21 @@
 /* Design tokens */
 :root {
-    --color-bg: #212529;
-    --color-surface: #2B3035;
-    --color-hover-surface: #3a4046;
-    --color-muted-surface: #343a40;
+    --color-bg: #35424e;
+    --color-surface: #2b2c2e;
+    --color-hover-surface: #3f4042;
+    --color-muted-surface: #333436;
 
-    --h1-color: #e3e0e9;
+    --h1-color: #eeecf1;
     --h2-color: #e3e0e9;
     --h3-color: #e3e0e9;
-    --p-color: #b3acbe;
+    --p-color: #cecbd3;
     --a-color: #b3acbe;
     --i-color: #b3acbe;
     --div-color: #b3acbe;
-    --span-color: #b3acbe;
+    --span-color: #d1cfd3;
+
+    --rotation-word-color: #ece8f1;
+    --tag-hover-color: #7a6792;
 
 
     --color-border: #8f8f8f;
@@ -35,7 +38,7 @@ html, body {
     height: 100%;
     min-height: 100%;
     margin: 0;
-    background: linear-gradient(90deg, rgba(33,37,41,1) 0%, rgba(60,65,74,1) 50%, rgba(33,37,41,1) 100%);
+    background: linear-gradient(90deg, rgb(34, 35, 36) 0%, rgb(43, 43, 44) 50%, rgba(34, 35, 36) 100%);
     background-color: #212529; /* fallback */
     -webkit-text-size-adjust: 100%; /* prevent automatic font scaling */
     -webkit-overflow-scrolling: touch; /* smoother scrolling on iOS */
@@ -51,7 +54,7 @@ body {
     align-items: flex-start;
     min-height: 100vh; /* ensures full viewport height */
     margin: 0;
-    background: linear-gradient(90deg, rgba(33, 37, 41, 1) 0%, rgba(60, 65, 74, 1) 50%, rgba(33, 37, 41, 1) 100%);
+    background: linear-gradient(90deg, rgb(34, 35, 36) 0%, rgb(43, 43, 44) 50%, rgba(34, 35, 36) 100%);
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
@@ -234,6 +237,7 @@ body span {
     white-space: nowrap;
     width: 100%;
     text-align: center;
+    color: var(--rotation-word-color);
 }
 
 .word-rotator .rotating-word.scroll-out {
@@ -439,15 +443,16 @@ body span {
 .tag {
     border: 1px solid var(--color-border-muted);
     background: var(--color-muted-surface);
-    padding: 4px 8px;
+    padding: 5px 7px;
     border-radius: 999px;
     font-size: 12px;
 }
 
 .tag:hover {
-    background: var(--color-hover-surface);
+    background: var(--tag-hover-color);
     transform: translateY(-2px);
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    border-color: var(--tag-hover-color);
 }
 
 .project-links {
