@@ -317,6 +317,7 @@ body span {
     grid-template-rows: repeat(1, 1fr);
     gap: 10px;
     width: 100%;
+    padding-bottom: var(--gap-md);
 }
 
 .Skill-item {
@@ -452,7 +453,7 @@ body span {
 .project-links {
     display: flex;
     gap: 12px;
-    margin-top: 8px;
+    margin-top: 20px;
 }
 
 .project-link {
