@@ -151,23 +151,18 @@ body span {
     display: grid;
     grid-template-columns: minmax(220px, 320px) 1fr;
     column-gap: var(--gap-md);
-    row-gap: 0;
-    align-items: start;
-    margin-left: auto;
-    margin-right: auto;
+    align-items: stretch;
     width: 100%;
-    padding: 0; /* container has no background */
-    background: transparent;
-    box-shadow: none;
+    margin-inline: auto;
 }
 
 /* Right column wrapper to stack description + links tightly */
 .About-right {
-    display: grid;
-    grid-template-rows: 1fr auto; /* description grows, links at bottom */
-    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     height: 100%;
-    min-width: 400px;
+    min-width: 0;
 }
 
 @media (max-width: 1320px) {
@@ -201,7 +196,6 @@ body span {
     background: #1f2327 center/cover no-repeat; /* placeholder bg */
     box-shadow: var(--shadow-lg);
     background-color: var(--color-surface); /* card surface */
-    justify-self: start; /* align left */
     overflow: hidden; /* avoid visual overflow */
 }
 
@@ -209,6 +203,7 @@ body span {
 .Description {
     align-self: stretch; /* fill available height */
     display: flex;
+    flex: 1;
     flex-direction: column;
     height: 100%;
     background: var(--color-surface);
@@ -269,7 +264,7 @@ body span {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: 0; /* tight under description via wrapper gap */
+    margin-top: auto; /* tight under description via wrapper gap */
     background: var(--color-surface);
     box-shadow: var(--shadow-lg);
     border-radius: var(--radius-lg);
