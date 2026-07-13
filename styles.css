@@ -106,11 +106,15 @@ body span {
     left: 0;
     width: 100%;
     height: var(--nav-height);
-    background: var(--color-surface);
+
+    background: rgba(43, 44, 46, 0.9); /*  --color-surface: #2b2c2e; */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px); /* Safari */
+
+
     color : black;
     z-index: 1000;
     box-shadow: var(--shadow-lg);
-
     display: flex;
     justify-content: flex-start;
     align-items: center;
